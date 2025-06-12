@@ -1,6 +1,6 @@
 @for(item of menuList; track item.id){ @if(item.idMenuParent === 0 &&
 !hasChildren(item)){
-<li>
+<li [routerLink]="item.url">
   <label for="my-drawer-3" aria-label="close sidebar">
     <a>
       <span class="material-icons">{{ item.icon }}</span>
