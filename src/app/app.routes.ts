@@ -10,4 +10,10 @@ export const routes: Routes = [
       ),
     // canActivate: [authGuard],
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/general/general.routes').then((m) => m.GENERAL_ROUTES),
+    // canActivate: [authGuard],
+  },
 ];
