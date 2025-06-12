@@ -1,0 +1,26 @@
+@for(item of menuList; track item.id){ @if(item.idMenuParent === 0 &&
+!hasChildren(item)){
+<li>
+  <a>
+    <span class="material-icons">{{ item.icon }}</span>
+    {{ item.title }}</a
+  >
+</li>
+} @if(item.idMenuParent === 0 && hasChildren(item)){
+<li>
+  <details>
+    <summary>
+      <span class="material-icons">{{ item.icon }}</span>
+      {{ item.title }}
+    </summary>
+    <ul>
+      @for(childItem of menuList; track childItem.id){
+      @if(childItem.idMenuParent === item.id){
+      <li>
+        <a>{{ childItem.title }}</a>
+      </li>
+      } }
+    </ul>
+  </details>
+</li>
+} }
