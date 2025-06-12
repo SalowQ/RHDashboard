@@ -1,10 +1,12 @@
 @for(item of menuList; track item.id){ @if(item.idMenuParent === 0 &&
 !hasChildren(item)){
 <li>
-  <a>
-    <span class="material-icons">{{ item.icon }}</span>
-    {{ item.title }}</a
-  >
+  <label for="my-drawer-3" aria-label="close sidebar">
+    <a>
+      <span class="material-icons">{{ item.icon }}</span>
+      {{ item.title }}</a
+    >
+  </label>
 </li>
 } @if(item.idMenuParent === 0 && hasChildren(item)){
 <li>
@@ -16,8 +18,10 @@
     <ul>
       @for(childItem of menuList; track childItem.id){
       @if(childItem.idMenuParent === item.id){
-      <li>
-        <a>{{ childItem.title }}</a>
+      <li [routerLink]="childItem.url">
+        <label for="my-drawer-3" aria-label="close sidebar">
+          <a>{{ childItem.title }}</a>
+        </label>
       </li>
       } }
     </ul>

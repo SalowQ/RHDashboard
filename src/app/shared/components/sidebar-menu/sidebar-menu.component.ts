@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { MenuItem } from '../../interfaces/menuItem';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar-menu',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './sidebar-menu.component.html',
   styleUrl: './sidebar-menu.component.css',
 })
@@ -76,7 +77,7 @@ export class SidebarMenuComponent {
       id: 9,
       title: 'Cadastro',
       description: 'Páginas de cadastro de funcionários',
-      url: '/funcionarios/ferias',
+      url: '/funcionarios/cadastro',
       icon: '',
       order: 1,
       idMenuParent: 3,
