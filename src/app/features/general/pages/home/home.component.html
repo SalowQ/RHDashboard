@@ -1,1 +1,47 @@
-<p>home works!</p>
+<div class="container mx-auto p-8">
+  <div class="text-center mb-12">
+    <h1 class="text-4xl font-bold text-primary mb-4">Bem-vindo ao RH Dashboard</h1>
+    <p class="text-xl text-gray-600">Sistema de Gestão de Recursos Humanos</p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-8 items-center">
+    <div class="space-y-6">
+      <div class="bg-base-300 p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-semibold mb-4">Funcionalidades Principais</h2>
+        <ul class="space-y-3">
+          <li class="flex items-center">
+            <span class="material-icons text-primary mr-2">people</span>
+            Gestão de Funcionários
+          </li>
+          <li class="flex items-center">
+            <span class="material-icons text-primary mr-2">schedule</span>
+            Controle de Horários
+          </li>
+          <li class="flex items-center">
+            <span class="material-icons text-primary mr-2">work</span>
+            Gestão de Cargos
+          </li>
+          <li class="flex items-center">
+            <span class="material-icons text-primary mr-2">settings</span>
+            Configurações do Sistema
+          </li>
+        </ul>
+      </div>
+
+      <button 
+        routerLink="/funcionarios/cadastro" 
+        class="btn btn-primary w-full">
+        <span class="material-icons mr-2">group_add</span>
+        Acessar Funcionários
+      </button>
+    </div>
+
+    <div class="flex justify-center">
+      <img 
+        src="assets/images/co-workers.svg" 
+        alt="RH Dashboard Illustration" 
+        class="max-w-md w-full"
+      >
+    </div>
+  </div>
+</div>
