@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ItemMenu } from '../../interfaces/itemMenu';
+import { MenuItem } from '../../interfaces/menuItem';
 
 @Component({
   selector: 'app-sidebar-menu',
@@ -8,7 +8,7 @@ import { ItemMenu } from '../../interfaces/itemMenu';
   styleUrl: './sidebar-menu.component.css',
 })
 export class SidebarMenuComponent {
-  menuList: ItemMenu[] = [
+  menuList: MenuItem[] = [
     {
       id: 1,
       title: 'Página Inicial',
@@ -96,7 +96,7 @@ export class SidebarMenuComponent {
     this.menuList = this.menuList.sort((a, b) => a.order - b.order);
   }
 
-  hasChildren(item: ItemMenu): boolean {
+  hasChildren(item: MenuItem): boolean {
     if (this.menuList.some((listItem) => listItem.idMenuParent === item.id)) {
       return true;
     }
