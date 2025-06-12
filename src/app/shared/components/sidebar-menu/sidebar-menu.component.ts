@@ -24,7 +24,7 @@ export class SidebarMenuComponent {
       description: 'Páginas de funcionários',
       url: '',
       icon: 'person',
-      order: 3,
+      order: 2,
       idMenuParent: 0,
     },
     {
@@ -33,7 +33,7 @@ export class SidebarMenuComponent {
       description: 'Páginas de parâmetros',
       url: '',
       icon: 'settings',
-      order: 2,
+      order: 3,
       idMenuParent: 0,
     },
     {
