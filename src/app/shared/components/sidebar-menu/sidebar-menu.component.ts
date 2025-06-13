@@ -75,9 +75,9 @@ export class SidebarMenuComponent {
     },
     {
       id: 9,
-      title: 'Cadastro',
-      description: 'Páginas de cadastro de funcionários',
-      url: '/funcionarios/cadastro',
+      title: 'Listagem',
+      description: 'Páginas de listagem de funcionários',
+      url: '/funcionarios/listagem',
       icon: '',
       order: 1,
       idMenuParent: 3,

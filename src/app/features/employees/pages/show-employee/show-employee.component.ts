@@ -12,12 +12,12 @@ import {
 import { AlertService } from '../../../../shared/services/alert/alert.service';
 
 @Component({
-  selector: 'app-show-register-employee',
+  selector: 'app-show-employee',
   imports: [NgxMaskDirective, StatusPipe, CpfPipe, ReactiveFormsModule],
-  templateUrl: './show-register-employee.component.html',
-  styleUrl: './show-register-employee.component.css',
+  templateUrl: './show-employee.component.html',
+  styleUrl: './show-employee.component.css',
 })
-export class ShowRegisterEmployeeComponent {
+export class ShowEmployeeComponent {
   private _page: number = 1;
   filter: boolean = false;
   sortedAlphabetically: boolean = false;

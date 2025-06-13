@@ -1,16 +1,21 @@
 import { Routes } from '@angular/router';
-import { ShowRegisterEmployeeComponent } from './pages/show-register-employee/show-register-employee.component';
-import { ShowRegisterVacationsComponent } from './pages/show-register-vacations/show-register-vacations.component';
+import { ShowEmployeeComponent } from './pages/show-employee/show-employee.component';
+import { ShowVacationsComponent } from './pages/show-vacations/show-vacations.component';
 
 export const EMPLOYEES_ROUTES: Routes = [
   {
+    path: 'listagem',
+    component: ShowEmployeeComponent,
+    // canActivate: [authGuard],
+  },
+  {
     path: 'cadastro',
-    component: ShowRegisterEmployeeComponent,
+    component: ShowEmployeeComponent,
     // canActivate: [authGuard],
   },
   {
     path: 'ferias',
-    component: ShowRegisterVacationsComponent,
+    component: ShowVacationsComponent,
     // canActivate: [authGuard],
   },
 ];
