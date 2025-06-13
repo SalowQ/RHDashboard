@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-coming-soon',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './coming-soon.component.html',
-  styleUrl: './coming-soon.component.css'
+  styleUrl: './coming-soon.component.css',
 })
-export class ComingSoonComponent {
-
-}
+export class ComingSoonComponent {}
