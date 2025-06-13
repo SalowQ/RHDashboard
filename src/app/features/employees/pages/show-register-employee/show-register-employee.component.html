@@ -49,7 +49,7 @@
       </tr>
     </thead>
     <tbody>
-      @for(employee of employeesList; track employee.id){
+      @for(employee of employeesListFiltered; track employee.id){
       <tr>
         <th>{{ employee.name }}</th>
         <td>{{ employee.cpf | cpf }}</td>
@@ -71,25 +71,32 @@
       type="radio"
       name="options"
       aria-label="1"
-      checked="checked"
+      [checked]="page === 1"
+      (click)="page = 1"
     />
     <input
       class="join-item btn btn-square"
       type="radio"
       name="options"
       aria-label="2"
+      [checked]="page === 2"
+      (click)="page = 2"
     />
     <input
       class="join-item btn btn-square"
       type="radio"
       name="options"
       aria-label="3"
+      [checked]="page === 3"
+      (click)="page = 3"
     />
     <input
       class="join-item btn btn-square"
       type="radio"
       name="options"
       aria-label="4"
+      [checked]="page === 4"
+      (click)="page = 4"
     />
   </div>
 </div>
