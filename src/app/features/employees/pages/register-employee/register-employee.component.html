@@ -1,0 +1,134 @@
+<fieldset
+  class="fieldset bg-base-200 border-base-300 rounded-box border p-4 m-5"
+>
+  <legend class="fieldset-legend text-lg font-bold">
+    Cadastrar funcionário
+  </legend>
+
+  <form
+    [formGroup]="employeeForm"
+    (submit)="sendForm()"
+    class="grid grid-cols-12 gap-3"
+  >
+    <!-- Linha 1 -->
+    <div class="col-span-12 md:col-span-6">
+      <label class="label"
+        >Nome completo<span class="text-error">*</span></label
+      >
+      <input
+        formControlName="nome"
+        type="text"
+        class="input validator w-full"
+        placeholder="Digitar..."
+        required
+      />
+    </div>
+
+    <div class="col-span-12 md:col-span-3">
+      <label class="label">CPF<span class="text-error">*</span></label>
+      <input
+        formControlName="cpf"
+        type="text"
+        class="input validator w-full"
+        placeholder="000.000.000-00"
+        mask="000.000.000-00"
+      />
+    </div>
+
+    <div class="col-span-12 md:col-span-3">
+      <label class="label"
+        >Data de nascimento<span class="text-error">*</span></label
+      >
+      <input
+        formControlName="dataNascimento"
+        type="date"
+        class="input w-full"
+      />
+    </div>
+
+    <!-- Linha 2 -->
+    <div class="col-span-12 md:col-span-6">
+      <label class="label">E-mail<span class="text-error">*</span></label>
+      <input
+        formControlName="email"
+        type="email"
+        class="input w-full"
+        placeholder="Digitar..."
+      />
+    </div>
+
+    <div class="col-span-12 md:col-span-6">
+      <label class="label">Contato<span class="text-error">*</span></label>
+      <input
+        formControlName="contato"
+        type="text"
+        class="input w-full"
+        placeholder="00 00000-0000"
+        mask="00 00000-0000"
+      />
+    </div>
+
+    <!-- Linha 3 -->
+    <div class="col-span-12">
+      <label class="label">Endereço<span class="text-error">*</span></label>
+      <input
+        formControlName="endereco"
+        type="text"
+        class="input w-full"
+        placeholder="Digitar..."
+      />
+    </div>
+
+    <!-- Linha 4 -->
+    <div class="col-span-12 md:col-span-4">
+      <label class="label">Setor<span class="text-error">*</span></label>
+      <select formControlName="setor" class="select w-full">
+        <option value="">Selecionar...</option>
+        <!-- options aqui -->
+      </select>
+    </div>
+
+    <div class="col-span-12 md:col-span-4">
+      <label class="label">Cargo<span class="text-error">*</span></label>
+      <select formControlName="cargo" class="select w-full">
+        <option value="">Selecionar...</option>
+        <!-- options aqui -->
+      </select>
+    </div>
+
+    <div class="col-span-12 md:col-span-4">
+      <label class="label">Salário<span class="text-error">*</span></label>
+      <input
+        formControlName="salario"
+        type="text"
+        class="input w-full"
+        placeholder="R$ 0.000,00"
+      />
+    </div>
+
+    <!-- Linha 5 -->
+    <div class="col-span-12 md:col-span-6">
+      <label class="label"
+        >Data da contratação<span class="text-error">*</span></label
+      >
+      <input
+        formControlName="dataContratacao"
+        type="date"
+        class="input w-full"
+      />
+    </div>
+
+    <div class="col-span-12 md:col-span-6">
+      <label class="label">Horário<span class="text-error">*</span></label>
+      <select formControlName="horario" class="select w-full">
+        <option value="">Selecionar...</option>
+        <!-- opções de horário -->
+      </select>
+    </div>
+
+    <!-- Botão -->
+    <div class="col-span-12 text-end mt-2">
+      <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>
+  </form>
+</fieldset>

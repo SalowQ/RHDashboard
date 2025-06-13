@@ -10,10 +10,17 @@ import {
   Validators,
 } from '@angular/forms';
 import { AlertService } from '../../../../shared/services/alert/alert.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-show-employee',
-  imports: [NgxMaskDirective, StatusPipe, CpfPipe, ReactiveFormsModule],
+  imports: [
+    NgxMaskDirective,
+    StatusPipe,
+    CpfPipe,
+    ReactiveFormsModule,
+    RouterLink,
+  ],
   templateUrl: './show-employee.component.html',
   styleUrl: './show-employee.component.css',
 })
@@ -625,14 +632,9 @@ export class ShowEmployeeComponent {
       schedule: { code: 102, description: '10h às 19h' },
     },
   ];
-  searchForm: FormGroup;
+  searchForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private alertService: AlertService) {
-    this.searchForm = this.fb.group({
-      cpf: [''],
-      name: ['', [Validators.maxLength(50)]],
-    });
-  }
+  constructor(private fb: FormBuilder, private alertService: AlertService) {}
 
   sortEmployeesAlphabetically(): void {
     const listToSort = this.filter
@@ -653,6 +655,10 @@ export class ShowEmployeeComponent {
   }
 
   ngOnInit() {
+    this.searchForm = this.fb.group({
+      cpf: [''],
+      name: ['', [Validators.maxLength(50)]],
+    });
     this.filterEmployees(this._page);
   }
 
