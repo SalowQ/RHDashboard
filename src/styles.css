@@ -1,5 +1,5 @@
 @import "tailwindcss";
 @plugin "daisyui" {
   exclude: rootscrollgutter;
-  themes: dark --default, bumblebee;
+  themes: bumblebee --default, dark --prefersdark;
 }

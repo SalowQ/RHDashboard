@@ -44,11 +44,11 @@
   </form>
 </fieldset>
 
+<div class="flex justify-between mx-5 mb-3">
+  <h1 class="fieldset-legend text-lg ms-4">Funcionários</h1>
+  <button class="btn btn-primary">Adicionar</button>
+</div>
 <div class="overflow-x-auto m-5">
-  <div class="flex justify-between mb-3">
-    <h1 class="fieldset-legend text-lg ms-4">Funcionários</h1>
-    <button class="btn btn-primary">Adicionar</button>
-  </div>
   <table class="table bg-base-200">
     <!-- head -->
     <thead>
@@ -75,8 +75,15 @@
         <td>{{ employee.position.description }}</td>
         <td>{{ employee.department.description }}</td>
         <td>{{ employee.active | status }}</td>
-        <td class="text-center"><span class="material-icons">edit</span></td>
-        <td class="text-center"><span class="material-icons">delete</span></td>
+        <td class="text-center cursor-pointer">
+          <span class="material-icons">edit</span>
+        </td>
+        <td
+          class="text-center cursor-pointer"
+          (click)="delete(employee.id, employee.active)"
+        >
+          <span class="material-icons">delete</span>
+        </td>
       </tr>
       }
     </tbody>

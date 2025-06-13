@@ -9,6 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AlertService } from '../../../../shared/services/alert/alert.service';
 
 @Component({
   selector: 'app-show-register-employee',
@@ -626,7 +627,7 @@ export class ShowRegisterEmployeeComponent {
   ];
   searchForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private alertService: AlertService) {
     this.searchForm = this.fb.group({
       cpf: [''],
       name: ['', [Validators.maxLength(50)]],
@@ -702,6 +703,43 @@ export class ShowRegisterEmployeeComponent {
       );
     } else {
       this.employeesListPages = this.employeesList.slice(startIndex, endIndex);
+    }
+  }
+
+  delete(employeeId: number, employeeActive: boolean) {
+    if (employeeActive) {
+      this.alertService
+        .show('warning', 'Deseja demitir esse funcionário?', true)
+        .then((result) => {
+          if (result.isConfirmed) {
+            const index = this.employeesList.findIndex(
+              (emp) => emp.id === employeeId
+            );
+            if (index !== -1) {
+              this.employeesList[index].active = false;
+              if (this.filter) {
+                const filteredIndex = this.employeesListFiltered.findIndex(
+                  (emp) => emp.id === employeeId
+                );
+                if (filteredIndex !== -1) {
+                  this.employeesListFiltered[filteredIndex].active = false;
+                }
+              }
+              this.filterEmployees(this._page);
+              this.alertService.show(
+                'success',
+                'Usuário demitido com sucesso!'
+              );
+            } else {
+              this.alertService.show('error', 'Usuário não encontrado.');
+            }
+          }
+        });
+    } else {
+      this.alertService.show(
+        'error',
+        'O usuário precisa estar ativo para se demitido.'
+      );
     }
   }
 
