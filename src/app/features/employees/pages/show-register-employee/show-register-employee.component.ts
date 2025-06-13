@@ -3,16 +3,24 @@ import { NgxMaskDirective } from 'ngx-mask';
 import { Employee } from '../../../../shared/interfaces/employee';
 import { StatusPipe } from '../../../../shared/pipes/status/status.pipe';
 import { CpfPipe } from '../../../../shared/pipes/cpf/cpf.pipe';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-show-register-employee',
-  imports: [NgxMaskDirective, StatusPipe, CpfPipe],
+  imports: [NgxMaskDirective, StatusPipe, CpfPipe, ReactiveFormsModule],
   templateUrl: './show-register-employee.component.html',
   styleUrl: './show-register-employee.component.css',
 })
 export class ShowRegisterEmployeeComponent {
   private _page: number = 1;
+  filter: boolean = false;
   employeesListFiltered: Employee[] = [];
+  employeesListPages: Employee[] = [];
   employeesList: Employee[] = [
     {
       id: 1,
@@ -615,17 +623,74 @@ export class ShowRegisterEmployeeComponent {
       schedule: { code: 102, description: '10h às 19h' },
     },
   ];
+  searchForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.searchForm = this.fb.group({
+      cpf: [''],
+      name: ['', [Validators.maxLength(50)]],
+    });
+  }
 
   ngOnInit() {
     this.filterEmployees(this._page);
   }
 
+  resetForm() {
+    this.searchForm.reset();
+    this.searchForm.markAsUntouched();
+  }
+
+  search() {
+    const formValues = this.searchForm.value;
+    const hasValue = Object.values(formValues).some((value) => value !== '');
+    this._page = 1;
+    this.filter = true;
+
+    if (hasValue && this.searchForm.valid) {
+      const { cpf, name } = formValues;
+      this.employeesListFiltered = this.employeesList
+        .filter((employee) => {
+          const matchesCpf =
+            !cpf || employee.cpf.includes(cpf.replace(/\D/g, ''));
+          const matchesName =
+            !name || employee.name.toLowerCase().includes(name.toLowerCase());
+          return matchesCpf && matchesName;
+        })
+        .filter((employee) => {
+          const matchesCpf = cpf
+            ? employee.cpf.includes(cpf.replace(/\D/g, ''))
+            : true;
+          const matchesName = name
+            ? employee.name.toLowerCase().includes(name.toLowerCase())
+            : true;
+          return matchesCpf && matchesName;
+        });
+      this.employeesListPages = this.employeesListFiltered.slice(0, 10);
+    } else {
+      this.filterEmployees(this._page);
+      this.filter = false;
+    }
+  }
+
   filterEmployees(page: number): void {
     const startIndex = (page - 1) * 10;
     const endIndex = startIndex + 10;
-    this.employeesListFiltered = this.employeesList.slice(startIndex, endIndex);
+    if (this.filter) {
+      this.employeesListPages = this.employeesListFiltered.slice(
+        startIndex,
+        endIndex
+      );
+    } else {
+      this.employeesListPages = this.employeesList.slice(startIndex, endIndex);
+    }
   }
 
+  get totalPages(): number[] {
+    const list = this.filter ? this.employeesListFiltered : this.employeesList;
+    const total = Math.ceil(list.length / 10);
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
   get page(): number {
     return this._page;
   }
