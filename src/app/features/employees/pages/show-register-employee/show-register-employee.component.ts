@@ -19,6 +19,7 @@ import {
 export class ShowRegisterEmployeeComponent {
   private _page: number = 1;
   filter: boolean = false;
+  sortedAlphabetically: boolean = false;
   employeesListFiltered: Employee[] = [];
   employeesListPages: Employee[] = [];
   employeesList: Employee[] = [
@@ -630,6 +631,24 @@ export class ShowRegisterEmployeeComponent {
       cpf: [''],
       name: ['', [Validators.maxLength(50)]],
     });
+  }
+
+  sortEmployeesAlphabetically(): void {
+    const listToSort = this.filter
+      ? this.employeesListFiltered
+      : this.employeesList;
+    const sortedList = [...listToSort].sort((a, b) => {
+      const comparison = a.name.localeCompare(b.name, 'pt-BR');
+      return this.sortedAlphabetically ? -comparison : comparison;
+    });
+    this.filter
+      ? (this.employeesListFiltered = sortedList)
+      : (this.employeesList = sortedList);
+
+    const startIndex = (this._page - 1) * 10;
+    const endIndex = startIndex + 10;
+    this.employeesListPages = sortedList.slice(startIndex, endIndex);
+    this.sortedAlphabetically = !this.sortedAlphabetically;
   }
 
   ngOnInit() {

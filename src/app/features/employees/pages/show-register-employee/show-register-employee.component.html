@@ -53,7 +53,12 @@
     <!-- head -->
     <thead>
       <tr class="bg-base-300">
-        <th>Nome</th>
+        <th (click)="sortEmployeesAlphabetically()" class="cursor-pointer">
+          Nome
+          <span class="material-icons align-middle text-sm">{{
+            sortedAlphabetically ? "arrow_drop_down" : "arrow_drop_up"
+          }}</span>
+        </th>
         <th>CPF</th>
         <th>Cargo</th>
         <th>Setor</th>
