@@ -77,13 +77,13 @@
       class="col-span-12 md:col-span-4"
     ></app-input-select>
 
-    <app-input-text
+    <app-input-select
       formControlName="salary"
       label="Salário"
-      [currency]="true"
-      placeholder="R$ 0.000,00"
+      [options]="salaryList"
+      [ref]="{ field: 'description', value: 'code' }"
       class="col-span-12 md:col-span-4"
-    ></app-input-text>
+    ></app-input-select>
 
     <!-- Linha 5 -->
     <app-input-text

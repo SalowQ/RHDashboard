@@ -47,6 +47,7 @@ export class RegisterEmployeeComponent {
     { code: 8, description: 'Técnico de Suporte' },
     { code: 9, description: 'Analista Financeiro' },
     { code: 10, description: 'Coordenador de TI' },
+    { code: 11, description: 'Diretor de Operações' },
   ];
   scheduleList: CodeDescription[] = [
     { code: 100, description: '08h às 17h' },
@@ -54,6 +55,26 @@ export class RegisterEmployeeComponent {
     { code: 102, description: '10h às 19h' },
     { code: 103, description: '07h às 16h' },
     { code: 104, description: '13h às 22h' },
+  ];
+  salaryList: CodeDescription[] = [
+    { code: 1001, description: 'R$ 3.500,00' },
+    { code: 1002, description: 'R$ 3.600,00' },
+    { code: 1003, description: 'R$ 3.900,00' },
+    { code: 1004, description: 'R$ 4.000,00' },
+    { code: 1005, description: 'R$ 4.100,00' },
+    { code: 1006, description: 'R$ 4.200,00' },
+    { code: 1007, description: 'R$ 4.500,00' },
+    { code: 1008, description: 'R$ 4.600,00' },
+    { code: 1009, description: 'R$ 4.700,00' },
+    { code: 1010, description: 'R$ 4.800,00' },
+    { code: 1011, description: 'R$ 5.200,00' },
+    { code: 1012, description: 'R$ 5.300,00' },
+    { code: 1013, description: 'R$ 6.000,00' },
+    { code: 1014, description: 'R$ 6.700,00' },
+    { code: 1015, description: 'R$ 7.200,00' },
+    { code: 1016, description: 'R$ 8.000,00' },
+    { code: 1017, description: 'R$ 9.100,00' },
+    { code: 1018, description: 'R$ 10.000,00' },
   ];
   editEmployee: EmployeeResponse | null = null;
 
@@ -80,14 +101,15 @@ export class RegisterEmployeeComponent {
 
     if (history.state.object) {
       this.editEmployee = history.state.object;
-      const { id, active, department, position, schedule, ...rest } = history
-        .state.object as EmployeeResponse;
+      const { id, active, department, position, schedule, salary, ...rest } =
+        history.state.object as EmployeeResponse;
 
       const formEditEmployee: EmployeeRequest = {
         ...rest,
         department: department.code,
         position: position.code,
         schedule: schedule.code,
+        salary: salary.code,
       };
 
       this.employeeForm.setValue(formEditEmployee);
