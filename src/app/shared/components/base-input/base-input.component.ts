@@ -12,6 +12,7 @@ export abstract class BaseInputComponent {
   @Input() size?: Size;
   @Input() formControlName: string = '';
   @Input() label: string = '';
+  @Input() optional: boolean = false;
 
   renderer = inject(Renderer2);
   element = inject(ElementRef);

@@ -1,6 +1,8 @@
 <div *ngIf="!currency">
   <label [for]="control.name + label" class="label">
-    <span class="font-semibold">{{ label }}</span>
+    <span class="font-semibold"
+      >{{ label }} <small *ngIf="optional">(Opcional)</small></span
+    >
   </label>
 
   <ng-container *ngIf="type !== 'date'">
@@ -41,7 +43,9 @@
 
 <div *ngIf="currency">
   <label class="label">
-    <span class="font-semibold">{{ label }}</span>
+    <span class="font-semibold"
+      >{{ label }} <small *ngIf="optional">(Opcional)</small></span
+    >
   </label>
 
   <input

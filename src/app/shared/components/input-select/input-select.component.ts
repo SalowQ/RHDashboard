@@ -10,14 +10,16 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
   imports: [CommonModule, FormsModule, ErrorMessageComponent],
   template: `
     <div class="form-control w-full mb-3">
-      <label *ngIf="label" class="label">
-        <span class="label-text font-semibold">{{ label }}</span>
+      <label *ngIf="label" class="label" [for]="control.name + label">
+        <span class="label-text font-semibold"
+          >{{ label }} <small *ngIf="optional">(Opcional)</small>
+        </span>
       </label>
       <select
         class="select select-bordered w-full {{ getValidationClasses() }} {{
           getSizeClasses()
         }}"
-        [id]="formControlName"
+        [id]="formControlName + label"
         (blur)="onTouched()"
         (change)="onChangeEvent($event)"
         [disabled]="disabled"
