@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NgxMaskDirective } from 'ngx-mask';
-import { Employee } from '../../../../shared/interfaces/employee';
 import { StatusPipe } from '../../../../shared/pipes/status/status.pipe';
 import { CpfPipe } from '../../../../shared/pipes/cpf/cpf.pipe';
 import {
@@ -11,6 +10,10 @@ import {
 } from '@angular/forms';
 import { AlertService } from '../../../../shared/services/alert/alert.service';
 import { RouterLink } from '@angular/router';
+import {
+  EmployeeRequest,
+  EmployeeResponse,
+} from '../../../../shared/interfaces/employee';
 
 @Component({
   selector: 'app-show-employee',
@@ -28,9 +31,9 @@ export class ShowEmployeeComponent {
   private _page: number = 1;
   filter: boolean = false;
   sortedAlphabetically: boolean = false;
-  employeesListFiltered: Employee[] = [];
-  employeesListPages: Employee[] = [];
-  employeesList: Employee[] = [
+  employeesListFiltered: EmployeeResponse[] = [];
+  employeesListPages: EmployeeResponse[] = [];
+  employeesList: EmployeeResponse[] = [
     {
       id: 1,
       name: 'Ana Paula Silva',
@@ -636,6 +639,21 @@ export class ShowEmployeeComponent {
 
   constructor(private fb: FormBuilder, private alertService: AlertService) {}
 
+  ngOnInit() {
+    this.searchForm = this.fb.group({
+      cpf: [''],
+      name: ['', [Validators.maxLength(50)]],
+    });
+    if (history.state.objeto) {
+      let newEmployee: EmployeeResponse = history.state.objeto;
+      newEmployee.department = { code: 10, description: 'TI' };
+      newEmployee.position = { code: 1, description: 'Analista de Sistemas' };
+      newEmployee.schedule = { code: 100, description: '08h às 17h' };
+      this.employeesList.push(newEmployee);
+    }
+    this.filterEmployees(this._page);
+  }
+
   sortEmployeesAlphabetically(): void {
     const listToSort = this.filter
       ? this.employeesListFiltered
@@ -652,14 +670,6 @@ export class ShowEmployeeComponent {
     const endIndex = startIndex + 10;
     this.employeesListPages = sortedList.slice(startIndex, endIndex);
     this.sortedAlphabetically = !this.sortedAlphabetically;
-  }
-
-  ngOnInit() {
-    this.searchForm = this.fb.group({
-      cpf: [''],
-      name: ['', [Validators.maxLength(50)]],
-    });
-    this.filterEmployees(this._page);
   }
 
   resetForm() {

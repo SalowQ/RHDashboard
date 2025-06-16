@@ -12,7 +12,7 @@
   >
     <!-- Linha 1 -->
     <app-input-text
-      formControlName="nome"
+      formControlName="name"
       label="Nome completo"
       placeholder="Digite..."
       type="text"
@@ -29,7 +29,7 @@
     ></app-input-text>
 
     <app-input-text
-      formControlName="dataNascimento"
+      formControlName="birthDate"
       label="Data de nascimento"
       type="date"
       class="col-span-12 md:col-span-3"
@@ -45,7 +45,7 @@
     ></app-input-text>
 
     <app-input-text
-      formControlName="contato"
+      formControlName="phone"
       label="Contato"
       placeholder="00 00000-0000"
       mask="00 00000-0000"
@@ -54,7 +54,7 @@
 
     <!-- Linha 3 -->
     <app-input-text
-      formControlName="endereco"
+      formControlName="address"
       label="Endereço"
       placeholder="Digite..."
       class="col-span-12"
@@ -62,7 +62,7 @@
 
     <!-- Linha 4 -->
     <app-input-select
-      formControlName="setor"
+      formControlName="department"
       label="Setor"
       [options]="departmentList"
       [ref]="{ field: 'description', value: 'code' }"
@@ -70,7 +70,7 @@
     ></app-input-select>
 
     <app-input-select
-      formControlName="cargo"
+      formControlName="position"
       label="Cargo"
       [options]="positionList"
       [ref]="{ field: 'description', value: 'code' }"
@@ -78,22 +78,23 @@
     ></app-input-select>
 
     <app-input-text
-      formControlName="salario"
+      formControlName="salary"
       label="Salário"
+      [currency]="true"
       placeholder="R$ 0.000,00"
       class="col-span-12 md:col-span-4"
     ></app-input-text>
 
     <!-- Linha 5 -->
     <app-input-text
-      formControlName="dataContratacao"
+      formControlName="hiringDate"
       label="Data de contratação"
       type="date"
       class="col-span-12 md:col-span-6"
     ></app-input-text>
 
     <app-input-select
-      formControlName="horario"
+      formControlName="schedule"
       label="Horário"
       [options]="scheduleList"
       [ref]="{ field: 'description', value: 'code' }"
