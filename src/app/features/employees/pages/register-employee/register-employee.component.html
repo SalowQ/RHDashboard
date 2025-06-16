@@ -2,7 +2,7 @@
   class="fieldset bg-base-200 border-base-300 rounded-box border p-4 m-5"
 >
   <legend class="fieldset-legend text-lg font-bold">
-    Cadastrar funcionário
+    {{ editEmployee ? "Editar" : "Cadastrar" }} funcionário
   </legend>
 
   <form
@@ -102,8 +102,18 @@
     ></app-input-select>
 
     <!-- Botão -->
-    <div class="col-span-12 text-end mt-2">
-      <button type="submit" class="btn btn-primary">Salvar</button>
+    <div class="col-span-12 grid grid-cols-12 gap-3 mt-2">
+      <div class="md:col-span-8"></div>
+      <button
+        type="button"
+        class="btn btn-neutral col-span-12 md:col-span-2"
+        [routerLink]="'/funcionarios/listagem'"
+      >
+        Cancelar
+      </button>
+      <button type="submit" class="btn btn-primary col-span-12 md:col-span-2">
+        Salvar
+      </button>
     </div>
   </form>
 </fieldset>

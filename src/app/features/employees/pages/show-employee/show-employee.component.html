@@ -77,7 +77,7 @@
         <td>{{ employee.position.description }}</td>
         <td>{{ employee.department.description }}</td>
         <td>{{ employee.active | status }}</td>
-        <td class="text-center cursor-pointer">
+        <td class="text-center cursor-pointer" (click)="edit(employee)">
           <span class="material-icons">edit</span>
         </td>
         <td

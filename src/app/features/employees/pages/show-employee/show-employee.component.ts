@@ -9,7 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AlertService } from '../../../../shared/services/alert/alert.service';
-import { RouterLink } from '@angular/router';
+import { NavigationExtras, Router, RouterLink } from '@angular/router';
 import {
   EmployeeRequest,
   EmployeeResponse,
@@ -637,19 +637,37 @@ export class ShowEmployeeComponent {
   ];
   searchForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private alertService: AlertService) {}
+  constructor(
+    private fb: FormBuilder,
+    private alertService: AlertService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.searchForm = this.fb.group({
       cpf: [''],
       name: ['', [Validators.maxLength(50)]],
     });
-    if (history.state.objeto) {
-      let newEmployee: EmployeeResponse = history.state.objeto;
-      newEmployee.department = { code: 10, description: 'TI' };
-      newEmployee.position = { code: 1, description: 'Analista de Sistemas' };
-      newEmployee.schedule = { code: 100, description: '08h às 17h' };
-      this.employeesList.push(newEmployee);
+    if (history.state.object) {
+      let newEditEmployee: EmployeeResponse = history.state.object;
+      newEditEmployee.department = { code: 10, description: 'TI' };
+      newEditEmployee.position = {
+        code: 1,
+        description: 'Analista de Sistemas',
+      };
+      newEditEmployee.schedule = { code: 100, description: '08h às 17h' };
+      newEditEmployee.active = true;
+      if (history.state.id) {
+        let idEmployee = history.state.id;
+        let indexEmployee = this.employeesList.findIndex(
+          (emp) => emp.id === idEmployee
+        );
+        if (indexEmployee != -1) {
+          this.employeesList[indexEmployee] = newEditEmployee;
+        }
+      } else {
+        this.employeesList.push(newEditEmployee);
+      }
     }
     this.filterEmployees(this._page);
   }
@@ -754,9 +772,25 @@ export class ShowEmployeeComponent {
     } else {
       this.alertService.show(
         'error',
-        'O usuário precisa estar ativo para se demitido.'
+        'O usuário precisa estar ativo para ser demitido.'
       );
     }
+  }
+
+  edit(employee: EmployeeResponse) {
+    if (!employee.active) {
+      this.alertService.show(
+        'error',
+        'O usuário precisa estar ativo para ser editado.'
+      );
+      return;
+    }
+    let navigationExtras: NavigationExtras = {
+      state: {
+        object: employee,
+      },
+    };
+    this.router.navigate(['/funcionarios/cadastro'], navigationExtras);
   }
 
   get totalPages(): number[] {
@@ -773,6 +807,5 @@ export class ShowEmployeeComponent {
   }
   private onPageChange(): void {
     this.filterEmployees(this._page);
-    console.log('Page changed to:', this._page);
   }
 }

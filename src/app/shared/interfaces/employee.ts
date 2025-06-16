@@ -9,10 +9,10 @@ interface EmployeeBase {
   address: string;
   hiringDate: string;
   salary: number;
-  active: boolean;
 }
 
 export interface EmployeeResponse extends EmployeeBase {
+  active: boolean;
   id: number;
   position: CodeDescription;
   department: CodeDescription;
