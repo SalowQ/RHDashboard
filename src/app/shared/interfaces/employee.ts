@@ -1,3 +1,5 @@
+import { CodeDescription } from './code-description';
+
 export interface Employee {
   id: number;
   name: string;
@@ -9,7 +11,7 @@ export interface Employee {
   hiringDate: string;
   salary: number;
   active: boolean;
-  position: { code: number; description: string };
-  department: { code: number; description: string };
-  schedule: { code: number; description: string };
+  position: CodeDescription;
+  department: CodeDescription;
+  schedule: CodeDescription;
 }
