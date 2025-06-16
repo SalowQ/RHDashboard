@@ -1,0 +1,61 @@
+<div *ngIf="!currency">
+  <label [for]="control.name + label" class="label">
+    <span class="font-semibold">{{ label }}</span>
+  </label>
+
+  <ng-container *ngIf="type !== 'date'">
+    <input
+      [attr.id]="control.name + label"
+      [type]="type"
+      class="input input-bordered w-full"
+      [ngClass]="[getValidationClasses(), getSizeClasses()]"
+      (input)="onInputEvent($event)"
+      (blur)="onTouched()"
+      [disabled]="disabled"
+      autocomplete="off"
+      [placeholder]="placeholder"
+      [attr.maxlength]="maxlength"
+      [mask]="mask"
+      [prefix]="prefix"
+      [suffix]="suffix"
+      [(ngModel)]="value"
+    />
+  </ng-container>
+
+  <ng-container *ngIf="type === 'date'">
+    <input
+      type="date"
+      class="input input-bordered w-full"
+      [ngClass]="[getValidationClasses(), getSizeClasses()]"
+      (input)="onInputEvent($event)"
+      (blur)="onTouched()"
+      [disabled]="disabled"
+      autocomplete="off"
+      max="9999-12-31"
+      [(ngModel)]="value"
+    />
+  </ng-container>
+
+  <app-error-message [control]="control" [label]="label"></app-error-message>
+</div>
+
+<div *ngIf="currency">
+  <label class="label">
+    <span class="font-semibold">{{ label }}</span>
+  </label>
+
+  <input
+    class="input input-bordered w-full"
+    [ngClass]="[getValidationClasses(), getSizeClasses()]"
+    (ngModelChange)="onInputEvent($event)"
+    (blur)="onTouched()"
+    [disabled]="disabled"
+    autocomplete="off"
+    [placeholder]="placeholder"
+    [(ngModel)]="value"
+    currencyMask
+    [options]="options"
+  />
+
+  <app-error-message [control]="control" [label]="label"></app-error-message>
+</div>
