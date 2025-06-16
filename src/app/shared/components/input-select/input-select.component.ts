@@ -9,7 +9,7 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
   standalone: true,
   imports: [CommonModule, FormsModule, ErrorMessageComponent],
   template: `
-    <div class="form-control w-full mb-3">
+    <div class="form-control w-full">
       <label *ngIf="label" class="label" [for]="control.name + label">
         <span class="label-text font-semibold"
           >{{ label }} <small *ngIf="optional">(Opcional)</small>
