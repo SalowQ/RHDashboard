@@ -68,7 +68,7 @@ export class SidebarMenuComponent {
       id: 8,
       title: 'Férias',
       description: 'Páginas de férias',
-      url: '/construcao',
+      url: '/funcionarios/ferias-listagem',
       icon: '',
       order: 2,
       idMenuParent: 3,

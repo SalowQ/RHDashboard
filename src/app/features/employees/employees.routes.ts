@@ -15,7 +15,7 @@ export const EMPLOYEES_ROUTES: Routes = [
     // canActivate: [authGuard],
   },
   {
-    path: 'ferias',
+    path: 'ferias-listagem',
     component: ShowVacationsComponent,
     // canActivate: [authGuard],
   },

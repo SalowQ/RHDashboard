@@ -10,10 +10,7 @@ import {
 } from '@angular/forms';
 import { AlertService } from '../../../../shared/services/alert/alert.service';
 import { NavigationExtras, Router, RouterLink } from '@angular/router';
-import {
-  EmployeeRequest,
-  EmployeeResponse,
-} from '../../../../shared/interfaces/employee';
+import { EmployeeResponse } from '../../../../shared/interfaces/employee';
 
 @Component({
   selector: 'app-show-employee',
